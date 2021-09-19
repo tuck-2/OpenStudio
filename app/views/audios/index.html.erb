@@ -4,5 +4,8 @@
     <p>タイトル:<%= audio.title %></p>
     <p>作曲者:<%= audio.user.name %></p>
     <p>説明:<%= audio.description %></p>
+    <audio src="<%= "#{audio.file}" %>" controls="">
+      <a src="<%= "#{audio.file}" %>">ダウンロード</a>
+    </audio>
   </div>
 <% end %>
