@@ -1,0 +1,8 @@
+<h1>楽曲一覧ページ</h1>
+<% @audios.each do |audio| %>
+  <div>
+    <p>タイトル:<%= audio.title %></p>
+    <p>作曲者:<%= audio.user.name %></p>
+    <p>説明:<%= audio.description %></p>
+  </div>
+<% end %>
