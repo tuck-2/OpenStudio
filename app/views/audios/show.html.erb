@@ -12,6 +12,9 @@
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", audio_comment_path(comment.audio, comment), method: :delete %>
+    <% end %>
   <% end %>
   <%= form_with model: [@audio, @comment], local:true do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントを書く" %>

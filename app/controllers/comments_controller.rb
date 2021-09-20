@@ -11,6 +11,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    Comment.find_by(id: params[:id]).destroy
+    redirect_to audio_path(params[:audio_id])
   end
 
   private
