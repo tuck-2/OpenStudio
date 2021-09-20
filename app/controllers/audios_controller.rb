@@ -16,6 +16,7 @@ class AudiosController < ApplicationController
 
   def show
     @audio = Audio.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit

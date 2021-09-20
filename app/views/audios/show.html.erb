@@ -5,3 +5,16 @@
 <audio src="<%= "#{@audio.file}" %>" controls="">
   <a src="<%= "#{@audio.file}" %>">ダウンロード</a>
 </audio>
+
+<div>
+  <p>コメント件数:<%= @audio.comments.count %></p>
+  <% @audio.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <%= comment.comment %>
+  <% end %>
+  <%= form_with model: [@audio, @comment], local:true do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントを書く" %>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>
