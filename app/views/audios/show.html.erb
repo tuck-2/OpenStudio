@@ -5,6 +5,19 @@
 <audio src="<%= "#{@audio.file}" %>" controls="">
   <a src="<%= "#{@audio.file}" %>">ダウンロード</a>
 </audio>
+<% if @audio.favorited_by?(current_user) %>
+  <p>
+    <%= link_to audio_favorites_path(@audio), method: :delete do %>
+      ❤<%= @audio.favorites.count %>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to audio_favorites_path(@audio), method: :post do %>
+      ♡<%= @audio.favorites.count %>
+    <% end %>
+  </p>
+<% end %>
 
 <div>
   <p>コメント件数:<%= @audio.comments.count %></p>
