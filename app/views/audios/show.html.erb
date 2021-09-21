@@ -5,6 +5,9 @@
 <audio src="<%= "#{@audio.file}" %>" controls="">
   <a src="<%= "#{@audio.file}" %>">ダウンロード</a>
 </audio>
+<% if @audio.user == current_user %>
+  <%= link_to "削除", audio_path(@audio.id), method: :delete %>
+<% end %>
 <% if @audio.favorited_by?(current_user) %>
   <p>
     <%= link_to audio_favorites_path(@audio), method: :delete do %>

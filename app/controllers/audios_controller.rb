@@ -26,6 +26,8 @@ class AudiosController < ApplicationController
   end
 
   def destroy
+    Audio.find(params[:id]).destroy
+    redirect_to user_path(current_user.id)
   end
 
   private
