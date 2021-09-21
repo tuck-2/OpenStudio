@@ -4,6 +4,7 @@ class Audio < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   mount_uploader :file, AudiofileUploader
+  mount_uploader :img, ImgUploader
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
