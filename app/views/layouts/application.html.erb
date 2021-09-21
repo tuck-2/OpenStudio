@@ -24,7 +24,7 @@
               <%= link_to "Upload", new_audio_path %>
             </li>
             <li>
-              My page
+              <%= link_to "My page", user_path(current_user.id) %>
             </li>
             <li>
               <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
