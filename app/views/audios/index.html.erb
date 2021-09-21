@@ -1,16 +1,23 @@
-<h1>楽曲一覧ページ</h1>
-<% @audios.each do |audio| %>
-  <div>
-    <% if audio.img.present? %>
-      <%= image_tag audio.img.url, size: '120x120' %>
-    <% else %>
-      <%= image_tag 'default_jacket.jpeg', size: '120x120' %>
+<div class="container">
+  <h2>Charts: New</h2>
+  <div class="row">
+    <% @audios.each do |audio| %>
+      <div class="col-md-3">
+        <div class="audio_container">
+          <%= link_to audio_path(audio.id) do %>
+            <div class="audio_img_container">
+              <% if audio.img.present? %>
+                <%= image_tag audio.img.url, class: "audio_img img-rounded" %>
+              <% else %>
+                <%= image_tag 'default_jacket.jpeg', class: "audio_img img-circle" %>
+              <% end %>
+            </div>
+            <div class="audio_body_container">
+              <p><%= audio.title %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-    <%= link_to "#{audio.title}", audio_path(audio.id) %>
-    <p>作曲者:<%= audio.user.name %></p>
-    <p>説明:<%= audio.description %></p>
-    <audio src="<%= "#{audio.file}" %>" controls="">
-      <a src="<%= "#{audio.file}" %>">ダウンロード</a>
-    </audio>
   </div>
-<% end %>
+</div>

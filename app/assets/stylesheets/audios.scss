@@ -1,3 +1,15 @@
 // Place all the styles related to the Audios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.audio_container {
+  background-color: #f4f4f4;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.audio_img {
+  width: 100%;
+  height: auto;
+  border-radius: 10%;
+}

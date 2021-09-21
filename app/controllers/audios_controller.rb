@@ -11,7 +11,7 @@ class AudiosController < ApplicationController
   end
 
   def index
-    @audios = Audio.all
+    @audios = Audio.all.order(created_at: "DESC")
   end
 
   def show
