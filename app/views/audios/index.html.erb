@@ -1,23 +1,4 @@
 <div class="container">
   <h2>Charts: New</h2>
-  <div class="row">
-    <% @audios.each do |audio| %>
-      <div class="col-md-3">
-        <div class="audio_container">
-          <%= link_to audio_path(audio.id) do %>
-            <div class="audio_img_container">
-              <% if audio.img.present? %>
-                <%= image_tag audio.img.url, class: "audio_img img-rounded" %>
-              <% else %>
-                <%= image_tag 'default_jacket.jpeg', class: "audio_img img-circle" %>
-              <% end %>
-            </div>
-            <div class="audio_body_container">
-              <p><%= audio.title %></p>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render 'audios/list', audios:@audios %>
 </div>

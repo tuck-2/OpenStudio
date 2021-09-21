@@ -1,4 +1,9 @@
-<h1>マイページ</h1>
-<div>
-  <%= @user.name %>
+<div class="container">
+  <div class="row">
+    <div class="mypage_header">
+      <p class="mypage_name"><%= @user.name %></p>
+    </div>
+  </div>
+  <h2>Uploaded</h2>
+  <%= render 'audios/list', audios: @my_audios %>
 </div>
