@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// 楽曲一覧
 .audio_container {
   background-color: #f4f4f4;
   margin: 15px 0;
@@ -12,4 +13,25 @@
   width: 100%;
   height: auto;
   border-radius: 10%;
+}
+
+// 楽曲詳細画面
+.audio_header {
+  background: linear-gradient(135deg, #3cb371, #ff8c00);
+}
+
+.audio_header_text {
+  color: #fff;
+  font-size: 30px;
+  background-color: #000;
+  display: inline-block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+
+.audio_player {
+  position: absolute;
+  bottom: 15px;
+  left: 50px;
 }

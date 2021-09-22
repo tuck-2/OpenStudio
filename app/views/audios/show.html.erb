@@ -1,45 +1,79 @@
-<h1>楽曲詳細ページ</h1>
-<p><%= @audio.title %></p>
-<p>作曲者:<%= @audio.user.name %></p>
-<p>説明:<%= @audio.description %></p>
-<audio src="<%= "#{@audio.file}" %>" controls="">
-  <a src="<%= "#{@audio.file}" %>">ダウンロード</a>
-</audio>
-<% if user_signed_in? %>
-  <% if @audio.user == current_user %>
-    <%= link_to "削除", audio_path(@audio.id), method: :delete %>
-  <% end %>
-  <% if @audio.favorited_by?(current_user) %>
-    <p>
-      <%= link_to audio_favorites_path(@audio), method: :delete do %>
-        ❤<%= @audio.favorites.count %>
+<div class="container">
+  <div class="row audio_header">
+    <div class="col-md-4 p-3">
+      <% if @audio.img.present? %>
+        <%= image_tag @audio.img.url, class: "audio_img img-rounded" %>
+      <% else %>
+        <%= image_tag 'default_jacket.jpeg', class: "audio_img img-circle" %>
       <% end %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to audio_favorites_path(@audio), method: :post do %>
-        ♡<%= @audio.favorites.count %>
-      <% end %>
-    </p>
-  <% end %>
-<% else %>
-  <p>
-    ♡<%= @audio.favorites.count %>
-  </p>
-<% end %>
+    </div>
+    <div class="col-md-8">
+      <p class="audio_header_text"><%= @audio.title %></p><br>
+      <p class="audio_header_text"><%= @audio.user.name %></p>
+      <div class="audio_player">
+        <audio src="<%= "#{@audio.file}" %>" controls="">
+          <a src="<%= "#{@audio.file}" %>">ダウンロード</a>
+        </audio>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <p>コメント件数:<%= @audio.comments.count %></p>
-  <% @audio.comments.each do |comment| %>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %>
-    <%= comment.comment %>
-    <% if comment.user == current_user %>
-      <%= link_to "削除", audio_comment_path(comment.audio, comment), method: :delete %>
+  <div class="">
+    <p><%= @audio.description %></p>
+    <% if user_signed_in? %>
+      <% if @audio.user == current_user %>
+        <%= link_to "楽曲を削除する", audio_path(@audio.id), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+      <% if @audio.favorited_by?(current_user) %>
+        <p>
+          <%= link_to audio_favorites_path(@audio), method: :delete do %>
+            ❤<%= @audio.favorites.count %>
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to audio_favorites_path(@audio), method: :post do %>
+            ♡<%= @audio.favorites.count %>
+          <% end %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>
+        ♡<%= @audio.favorites.count %>
+      </p>
     <% end %>
-  <% end %>
-  <%= form_with model: [@audio, @comment], local:true do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントを書く" %>
-    <%= f.submit "送信" %>
-  <% end %>
+  </div>
+
+  <div class="">
+    <div class="mb-3">
+      <p class="border-bottom border-secondary"><%= @audio.comments.count %> comments</p>
+      <% @audio.comments.each do |comment| %>
+        <div class="row border-bottom border-secondary ml-3 mr-3">
+          <div class="col-10">
+            <p>
+              <%= comment.user.name %>
+              <span><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+            </p>
+            <p><%= comment.comment %></p>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <% if comment.user == current_user %>
+              <%= link_to "削除", audio_comment_path(comment.audio, comment), method: :delete, class: "btn-sm btn-danger" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_with model: [@audio, @comment], local:true do |f| %>
+      <div class="row">
+        <div class="col-10">
+          <%= f.text_area :comment, rows: '3', placeholder: "コメントを書く", class: "form-control mb-1" %>
+        </div>
+        <div class="col-2 d-flex align-items-end">
+          <%= f.submit "送信", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
