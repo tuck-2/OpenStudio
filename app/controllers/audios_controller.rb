@@ -1,4 +1,6 @@
 class AudiosController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def new
     @audio = Audio.new
   end
@@ -29,8 +31,13 @@ class AudiosController < ApplicationController
   end
 
   def destroy
-    Audio.find(params[:id]).destroy
-    redirect_to user_path(current_user.id)
+    audio = Audio.find(params[:id])
+    if audio.user == current_user
+      audio.destroy
+      redirect_to user_path(current_user.id)
+    else
+      redirect_to audio_path(audio.id)
+    end
   end
 
   private

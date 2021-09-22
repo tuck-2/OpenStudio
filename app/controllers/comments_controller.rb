@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     audio = Audio.find(params[:audio_id])
     comment = current_user.comments.new(comment_params)
