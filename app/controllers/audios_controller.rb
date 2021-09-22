@@ -6,8 +6,11 @@ class AudiosController < ApplicationController
   def create
     @audio = Audio.new(audio_params)
     @audio.user_id = current_user.id
-    @audio.save
-    redirect_to audios_path
+    if @audio.save
+      redirect_to audios_path
+    else
+      render :new
+    end
   end
 
   def index
