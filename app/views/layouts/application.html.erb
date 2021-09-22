@@ -10,18 +10,36 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-    <% end %>
+    <header>
+      <%= link_to root_path do %>
+        <h1 id="logo">Open Studio</h1>
+      <% end %>
+      <nav>
+        <ul>
+          <li>
+            <%= link_to "Musics", audios_path %>
+          </li>
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "Upload", new_audio_path %>
+            </li>
+            <li>
+              <%= link_to "My page", user_path(current_user.id) %>
+            </li>
+            <li>
+              <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Sign in", new_user_session_path %>
+            </li>
+            <li>
+              <%= link_to "Sign up", new_user_registration_path %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
