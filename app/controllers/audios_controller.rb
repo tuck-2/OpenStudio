@@ -24,12 +24,6 @@ class AudiosController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
     audio = Audio.find(params[:id])
     if audio.user == current_user
